@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPIDER-HUB • Order</title>
+<style>
+  :root{
+    --red:#e21b23; --dark:#07080c; --card:#11141c; --line:#2b303b;
+    --white:#f5f7fb; --muted:#a8afbd; --blue:#1683ff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; color:var(--white); font-family:Arial,Helvetica,sans-serif;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(226,27,35,.28), transparent 34%),
+      linear-gradient(135deg,#050507 0%,#0b0e15 55%,#050507 100%);
+    overflow-x:hidden;
+  }
+  body:before{
+    content:""; position:fixed; inset:-20%; pointer-events:none; opacity:.12;
+    background-image:
+      linear-gradient(30deg,transparent 48%,#fff 49%,#fff 50%,transparent 51%),
+      linear-gradient(150deg,transparent 48%,#fff 49%,#fff 50%,transparent 51%);
+    background-size:90px 90px; transform:rotate(8deg);
+  }
+  .wrap{max-width:820px;margin:auto;padding:22px 15px 50px;position:relative}
+  .hero{text-align:center;padding:24px 10px 20px}
+  .logo{
+    display:inline-block;font-weight:1000;letter-spacing:3px;font-size:clamp(38px,11vw,76px);
+    color:#fff;text-shadow:3px 3px 0 var(--red), -2px -2px 0 #111; transform:skew(-7deg);
+  }
+  .sub{margin-top:7px;color:#cfd4dd;font-size:13px;letter-spacing:3px}
+  .badge{display:inline-block;margin-top:14px;background:var(--red);padding:7px 12px;border-radius:999px;font-weight:800;font-size:11px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:15px}
+  .brand{
+    border:1px solid var(--line); background:linear-gradient(145deg,#171b25,#0d1016);
+    border-radius:18px;padding:20px;min-height:125px;cursor:pointer;color:#fff;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);transition:.18s; text-align:left;
+  }
+  .brand:hover{transform:translateY(-3px);border-color:var(--red)}
+  .brand h2{margin:0 0 8px;font-size:20px}
+  .brand p{margin:0;color:var(--muted);font-size:12px}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--red);display:inline-block;margin-right:7px}
+  .panel{display:none;margin-top:18px;border:1px solid var(--line);background:rgba(10,12,18,.94);border-radius:20px;padding:20px}
+  .panel.active{display:block}
+  .back{background:none;border:0;color:#cbd0da;cursor:pointer;padding:0;margin-bottom:12px}
+  .panel h2{margin:0 0 15px}
+  .products{display:grid;gap:10px}
+  .product{
+    width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+    border:1px solid var(--line);background:#121620;color:#fff;border-radius:14px;padding:15px;
+    cursor:pointer;text-align:left;
+  }
+  .product:hover,.product.selected{border-color:var(--red);background:#1a1217}
+  .role{font-weight:800}.price{font-weight:1000;color:#ff4b51;white-space:nowrap}
+  .checkout{display:none;margin-top:18px;border-top:1px solid var(--line);padding-top:18px}
+  .checkout.active{display:block}
+  .paybox{background:#171b24;border-radius:15px;padding:15px;margin:12px 0}
+  .paybox strong{color:#fff}
+  .copy{border:0;background:#262c38;color:#fff;border-radius:9px;padding:8px 10px;margin-left:8px;cursor:pointer}
+  .upload{
+    border:1px dashed #4b5361;border-radius:14px;padding:16px;text-align:center;color:var(--muted);
+    cursor:pointer;background:#0d1016
+  }
+  input[type=file]{display:none}
+  #preview{display:none;max-width:100%;max-height:260px;margin:13px auto 0;border-radius:12px}
+  .send{
+    width:100%;margin-top:14px;border:0;border-radius:13px;padding:14px;font-weight:900;cursor:pointer;
+    background:var(--red);color:#fff;font-size:15px;
+  }
+  .send:disabled{opacity:.45;cursor:not-allowed}
+  .note{font-size:11px;line-height:1.6;color:var(--muted);margin-top:12px}
+  .tg{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .tg a{color:#fff;text-decoration:none;background:#1683ff;padding:10px 13px;border-radius:10px;font-size:12px;font-weight:800}
+  footer{text-align:center;color:#697181;font-size:10px;margin-top:25px}
+  @media(max-width:540px){.grid{grid-template-columns:1fr}.wrap{padding-top:8px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="logo">SPIDER-HUB</div>
+    <div class="sub">DEVELOPER YANSS25</div><div class="sub" style="margin-top:4px;font-size:11px;letter-spacing:2px;opacity:.8">PROJECT ORDER YANSS</div>
+    <div class="badge">SELECT PRODUK</div>
+  </section>
+
+  <section class="grid" id="brands">
+    <button class="brand" onclick="showBrand('mantax')">
+      <h2><span class="dot"></span>MANTA×</h2><p>Pilih role member atau reseller.</p>
+    </button>
+    <button class="brand" onclick="showBrand('darkverse')">
+      <h2><span class="dot"></span>DARKVERSE</h2><p>Role member tersedia.</p>
+    </button>
+    <button class="brand" onclick="showBrand('syam')">
+      <h2><span class="dot"></span>SYAM</h2><p>Role fullup tersedia.</p>
+    </button>
+    <button class="brand" onclick="showBrand('scdarkness')">
+      <h2><span class="dot"></span>SC DARKNESS</h2><p>Role member tersedia.</p>
+    </button>
+  </section>
+
+  <section class="panel" id="panel">
+    <button class="back" onclick="goBack()">← Kembali</button>
+    <h2 id="brandTitle"></h2>
+    <div class="products" id="products"></div>
+
+    <div class="checkout" id="checkout">
+      <h3 id="selectedText">Checkout</h3>
+      <div class="paybox">
+        <div>Bayar via <strong>DANA</strong></div>
+        <div style="margin-top:8px;font-size:20px;font-weight:900">085181622894
+          <button class="copy" onclick="copyDana()">Salin</button>
+        </div>
+        <div style="margin-top:7px;color:#a8afbd;font-size:12px">a.n. V**** D*** A********</div>
+      </div>
+
+      <label class="upload" for="proof">
+        📷 Pilih foto bukti pembayaran
+        <div style="margin-top:5px;font-size:11px">Setelah memilih, foto akan muncul di bawah.</div>
+      </label>
+      <input id="proof" type="file" accept="image/*">
+      <img id="preview" alt="Preview bukti pembayaran">
+
+      <button class="send" id="sendBtn" disabled>Kirim bukti & proses via Telegram</button>
+
+      <div class="note">
+        Setelah foto dipilih, tekan tombol di atas. Aplikasi akan membuka Telegram dengan pesan order.
+        Foto bukti tetap perlu dikirim di chat Telegram karena browser tidak dapat otomatis melampirkan file lokal ke Telegram.
+      </div>
+      <div class="tg">
+        <a href="https://t.me/Yansssss25" target="_blank" rel="noopener">Telegram @Yansssss25</a>
+        <a href="https://t.me/yanssss25" target="_blank" rel="noopener">Telegram @yanssss25</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>SPIDER-HUB • Order System</footer>
+</div>
+
+<script>
+const data = {
+  mantax: {name:"MANTA×", items:[
+    {role:"Member", price:60000},
+    {role:"Reseller", price:80000}
+  ]},
+  darkverse: {name:"DARKVERSE", items:[
+    {role:"Member", price:80000}
+  ]},
+  syam: {name:"SYAM", items:[
+    {role:"Fullup", price:40000}
+  ]},
+  scdarkness: {name:"SC DARKNESS", items:[
+    {role:"Member", price:15000}
+  ]}
+};
+
+let currentBrand = null;
+let selected = null;
+
+const rupiah = n => new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
+
+function showBrand(key){
+  currentBrand = key; selected = null;
+  document.getElementById('brands').style.display='none';
+  document.getElementById('panel').classList.add('active');
+  document.getElementById('brandTitle').textContent=data[key].name;
+  document.getElementById('checkout').classList.remove('active');
+
+  const products=document.getElementById('products');
+  products.innerHTML='';
+  data[key].items.forEach((item,i)=>{
+    const btn=document.createElement('button');
+    btn.className='product';
+    btn.innerHTML=`<span class="role">${item.role}</span><span class="price">${rupiah(item.price)}</span>`;
+    btn.onclick=()=>selectProduct(i);
+    products.appendChild(btn);
+  });
+}
+
+function selectProduct(i){
+  selected=data[currentBrand].items[i];
+  document.querySelectorAll('.product').forEach((el,idx)=>el.classList.toggle('selected',idx===i));
+  document.getElementById('selectedText').textContent=`${data[currentBrand].name} — ${selected.role} — ${rupiah(selected.price)}`;
+  document.getElementById('checkout').classList.add('active');
+}
+
+function goBack(){
+  document.getElementById('panel').classList.remove('active');
+  document.getElementById('brands').style.display='grid';
+  selected=null;
+}
+
+function copyDana(){
+  navigator.clipboard?.writeText('085181622894');
+  alert('Nomor DANA disalin: 085181622894');
+}
+
+document.getElementById('proof').addEventListener('change',function(){
+  const file=this.files[0];
+  const preview=document.getElementById('preview');
+  const send=document.getElementById('sendBtn');
+  if(!file){preview.style.display='none';send.disabled=true;return;}
+  preview.src=URL.createObjectURL(file);
+  preview.style.display='block';
+  send.disabled=false;
+});
+
+document.getElementById('sendBtn').addEventListener('click',()=>{
+  if(!selected) return;
+  const text =
+`HALO YANSS, SAYA MAU ORDER
+
+Produk: ${data[currentBrand].name}
+Role: ${selected.role}
+Harga: ${rupiah(selected.price)}
+Pembayaran: DANA 085181622894
+Nama DANA: V**** D*** A********
+
+Saya sudah menyiapkan foto bukti pembayaran. Saya akan mengirim foto tersebut di chat ini untuk proses pembelian.`;
+
+  window.open('https://t.me/Yansssss25?text='+encodeURIComponent(text),'_blank');
+});
+</script>
+</body>
+</html>
