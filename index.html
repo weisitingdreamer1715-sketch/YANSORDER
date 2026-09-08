@@ -7,7 +7,7 @@
 <style>
   :root{
     --red:#e21b23; --dark:#07080c; --card:#11141c; --line:#2b303b;
-    --white:#f5f7--muted:#a8afbd; --blue:#1683ff;
+    --white:#fff; --muted:#fff; --blue:#1683ff;
   }
   *{box-sizing:border-box}
   body{
@@ -74,6 +74,14 @@
   .tg{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
   .tg a{color:#fff;text-decoration:none;background:#1683ff;padding:10px 13px;border-radius:10px;font-size:12px;font-weight:800}
   footer{text-align:center;color:#697181;font-size:10px;margin-top:25px}
+
+  .panel, .panel *{color:#fff}
+  .panel .price{color:#fff}
+  .panel .note{color:#fff}
+  .panel .back{color:#fff}
+  .panel .upload{color:#fff}
+  .panel .paybox div[style*="color:#a8afbd"]{color:#fff !important}
+
   @media(max-width:540px){.grid{grid-template-columns:1fr}.wrap{padding-top:8px}}
 </style>
 </head>
@@ -109,7 +117,7 @@
       <h3 id="selectedText">Checkout</h3>
       <div class="paybox">
         <div>Bayar via <strong>DANA</strong></div>
-        <div style="margin-top:8px;font-size:20px;font-weight:900">085181622894
+        <div style="margin-top:8px;font-size:20px;font-weight:900;color:#fff">085181622894
           <button class="copy" onclick="copyDana()">Salin</button>
         </div>
         <div style="margin-top:7px;color:#a8afbd;font-size:12px">a.n. V**** D*** A********</div>
