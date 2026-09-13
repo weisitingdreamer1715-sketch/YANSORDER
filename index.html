@@ -149,8 +149,8 @@ const data = {
   mantax: {name:"MANTA×", items:[
     {role:"Role Harian (1 Hari)", price:5000},
     {role:"Role Bulanan (1 Bulan)", price:40000},
-    {role:"Fullup", price:60000},
-    {role:"Reseller", price:80000},
+    {role:"Fullup (dapet sender global)", price:60000},
+    {role:"Reseller (dapet sender global)", price:80000},
   ]},
   darkverse: {name:"DARKVERSE", items:[
     {role:"Fullup", price:50000},
@@ -217,7 +217,7 @@ document.getElementById('proof').addEventListener('change',function(){
 document.getElementById('sendBtn').addEventListener('click',()=>{
   if(!selected) return;
   const text =
-`HALO YANSS, SAYA MAU ORDER
+`HALO YANSS,SAYA MAU MENGKONFIRMASI BAHWA SAYA TELAH MEMBELI
 
 Produk: ${data[currentBrand].name}
 Role: ${selected.role}
