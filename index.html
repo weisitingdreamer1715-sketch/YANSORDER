@@ -127,7 +127,7 @@
       <input id="proof" type="file" accept="image/*">
       <img id="preview" alt="Preview bukti pembayaran">
 
-      <button class="send" id="sendBtn" disabled>Kirim bukti & proses via Telegram</button>
+      <button class="send" id="sendBtn" disabled>Kirim bukti & proses via Whatsapp</button>
 
       <div class="note">
         Setelah foto dipilih, tekan tombol di atas. Aplikasi akan membuka Whatsapp dengan pesan order.
@@ -218,7 +218,7 @@ document.getElementById('proof').addEventListener('change',function(){
 document.getElementById('sendBtn').addEventListener('click',()=>{
   if(!selected) return;
   const text =
-`HALO YANSS,SAYA MAU MENGKONFIRMASI BAHWA SAYA TELAH MEMBELI
+`HALO YANSS,GUA MAU MENGKONFIRMASI KALO GUA UDAH BELI
 
 Produk: ${data[currentBrand].name}
 Role: ${selected.role}
@@ -228,7 +228,7 @@ Nama DANA: V**** D*** A********
 
 Saya sudah menyiapkan foto bukti pembayaran. Saya akan mengirim foto tersebut di chat ini untuk proses pembelian.`;
 
-  window.open('https://t.me/Yansssss25?text='+encodeURIComponent(text),'_blank');
+  window.open('https://wa.me/message/5ZLUDJWCK2UNI1?text='+encodeURIComponent(text),'_blank');
 });
 </script>
 </body>
